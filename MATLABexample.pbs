@@ -1,0 +1,19 @@
+
+
+#PBS -l walltime=24:00:00
+#PBS -lselect=1:ncpus=12:mem=72gb:ngpus=3:gpu_type=P100
+ 
+module load matlab/r2020a
+
+ 
+# Move to the node
+cd $TMPDIR
+ 
+# Copy code
+cp -r $PBS_O_WORKDIR/* ./
+
+# Run python code
+matlab -batch LMpackage_personalised_model.m > resultFD 
+
+cp -r resultFD $PBS_O_WORKDIR/
+ 
